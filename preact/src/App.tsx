@@ -1,71 +1,38 @@
-import { useEffect, useState } from "react";
-import { VSCodeButton, VSCodeTextField, } from "@vscode/webview-ui-toolkit/react";
-import { vscode } from "./utils/vscode";
-
-import "./App.css";
+import { useState } from "preact/hooks";
+import preactLogo from "./assets/preact.svg";
+import viteLogo from "/vite.svg";
+import "./app.css";
 
 export function App() {
-  const [message, setMessage] = useState("");
-  const [state, setState] = useState("");
-
-  const onSetState = () => {
-    vscode.setState(state);
-  };
-  const onGetState = () => {
-    setState((vscode.getState() || "") as string);
-  };
-
-  function onPostMessage() {
-    vscode.postMessage({
-      type: "hello",
-      data: `💬: ${message || "Empty"}`,
-    });
-  }
-  useEffect(() => {
-    const messageListener = (event: MessageEvent) => {
-      const message = event.data;
-      switch (message.type) {
-        case "selectedText":
-        case "selectionChanged":
-        case "selection":
-          console.log("=========== seleceted text in th frontend =============== ", message.data);
-          setMessage(message.data);
-          break;
-      }
-    };
-
-    window.addEventListener("message", messageListener);
-
-    return () => {
-      window.removeEventListener("message", messageListener);
-    };
-  }, []);
+  const [count, setCount] = useState(0);
 
   return (
-    <main>
-      <p>{message}</p>
-      <h1>Hello React!</h1>
-      <VSCodeButton onClick={onPostMessage}>Test VSCode Message</VSCodeButton>
+    <>
       <div>
-        <VSCodeTextField value={message} onInput={(e) => setMessage(e.target.value)}>
-          Please enter a message
-        </VSCodeTextField>
-        <div>Message is: {message}</div>
+        <a href="https://vite.dev" target="_blank">
+          <img src={viteLogo} class="logo" alt="Vite logo" />
+        </a>
+        <a href="https://preactjs.com" target="_blank">
+          <img src={preactLogo} class="logo preact" alt="Preact logo" />
+        </a>
       </div>
-      <div>
-        <VSCodeTextField value={state} onInput={(e) => setState(e.target.value)}>
-          Please enter a state
-        </VSCodeTextField>
-        <div>State is: {state}</div>
-        <div>
-          <VSCodeButton onClick={onSetState}>setState</VSCodeButton>
-          <VSCodeButton style={{ marginLeft: "8px" }} onClick={onGetState}>
-            getState
-          </VSCodeButton>
-        </div>
+      <h1>Vite + Preact</h1>
+      <div class="card">
+        <button onClick={() => setCount((count) => count + 1)}>count is {count}</button>
+        <p>
+          Edit <code>src/app.tsx</code> and save to test HMR
+        </p>
       </div>
-    </main>
+      <p>
+        Check out{" "}
+        <a
+          href="https://preactjs.com/guide/v10/getting-started#create-a-vite-powered-preact-app"
+          target="_blank">
+          create-preact
+        </a>
+        , the official Preact + Vite starter
+      </p>
+      <p class="read-the-docs">Click on the Vite and Preact logos to learn more</p>
+    </>
   );
 }
-
-// export default App;
