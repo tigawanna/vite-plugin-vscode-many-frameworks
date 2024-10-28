@@ -1,7 +1,13 @@
 {
   "extends": "@tomjs/tsconfig/node.json",
   "compilerOptions": {
-    "composite": true
+    "composite": true,
+    "paths": {
+      "react": ["./node_modules/preact/compat/"],
+      "react-dom": ["./node_modules/preact/compat/"]
+    },
+    "jsx": "react-jsx",
+    "jsxImportSource": "preact"
   },
   "include": ["extension", "vite.config.ts"]
 }

@@ -49,7 +49,7 @@ var import_webview = __toESM(require("@tomjs/vite-plugin-vscode/webview"));
 var import_vscode = require("vscode");
 var WebviewHelper = class {
   static setupHtml(webview, context) {
-    return "http://localhost:5174/" ? (0, import_webview.default)("http://localhost:5174/") : (0, import_webview.default)(webview, context);
+    return "http://localhost:5173/" ? (0, import_webview.default)("http://localhost:5173/") : (0, import_webview.default)(webview, context);
   }
   static setupWebviewHooks(webview, disposables) {
     webview.onDidReceiveMessage(

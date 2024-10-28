@@ -4,7 +4,7 @@ import { vscode } from "./utils/vscode";
 
 import "./App.css";
 
-function App() {
+export function App() {
   const [message, setMessage] = useState("");
   const [state, setState] = useState("");
 
@@ -68,4 +68,4 @@ function App() {
   );
 }
 
-export default App;
+// export default App;
